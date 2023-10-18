@@ -39,7 +39,7 @@ public class ScriptPowerShell implements Serializable {
         Path tempdirectory = Files.createTempDirectory("tdt-s-");
 
         // Create a temporary file to store our powershell resource stream.
-        File script = File.createTempFile("tdt-s-", ".ps1", new File(tempdirectory.toString()));
+        File script = Files.createTempFile(new File(tempdirectory.toString()).toPath(), "tdt-s-", ".ps1").toFile();
         Files.copy(resourceStream, script.getAbsoluteFile().toPath(), REPLACE_EXISTING);
 
         // Is source type is script, create temporary file.
@@ -119,7 +119,7 @@ public class ScriptPowerShell implements Serializable {
     }
 
     private String createTempScriptFile(String basedirectory, String content) throws IOException {
-        File file = File.createTempFile("tdt-", ".sql", new File(basedirectory));
+        File file = Files.createTempFile(new File(basedirectory).toPath(), "tdt-", ".sql").toFile();
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath()), StandardCharsets.UTF_8);
         try {
             writer.write(content);

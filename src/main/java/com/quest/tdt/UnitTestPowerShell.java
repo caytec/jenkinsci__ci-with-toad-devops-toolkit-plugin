@@ -37,7 +37,7 @@ public class UnitTestPowerShell implements Serializable{
         Path tempdirectory = Files.createTempDirectory("tdt-ut-");
 
         // Create a temporary file to store our powershell resource stream.
-        File script = File.createTempFile("tdt-ut-", ".ps1", new File(tempdirectory.toString()));
+        File script = Files.createTempFile(new File(tempdirectory.toString()).toPath(), "tdt-ut-", ".ps1").toFile();
         Files.copy(resourceStream, script.getAbsoluteFile().toPath(), REPLACE_EXISTING);
 
         // Create our command with appropriate arguments.
